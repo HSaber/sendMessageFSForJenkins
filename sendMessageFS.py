@@ -26,7 +26,18 @@ JOB_URL = sys.argv[1]
 JOB_NAME = sys.argv[2]
 BUILD_NUMBER = sys.argv[3]
 BUILD_USER = sys.argv[4]
-isFinish = "开始构建" if str(sys.argv[5]) == str(0) else "构建完成"
+
+status_arg = str(sys.argv[5])
+if status_arg == "0":
+    isFinish = "开始构建"
+    template_color = "blue"
+elif status_arg == "1":
+    isFinish = "构建成功"
+    template_color = "green"
+else:
+    isFinish = "构建失败"
+    template_color = "red"
+
 timestamp = str(calendar.timegm(time.gmtime()))
 currenttime = time.strftime("%Y-%m-%d %H:%M:%S", time.localtime())
 sign_key = 'E7ZmCwfZPsFLVsuMXKpQRf'
@@ -66,6 +77,7 @@ json = {
             "tag": "action"
         }],
         "header": {
+            "template": template_color,
             "title": {
                 "content": JOB_NAME + " "+isFinish+"",
                 "tag": "plain_text"
@@ -74,4 +86,3 @@ json = {
     }
 }
 requests.request(method=method, url=url, headers=headers, json=json)
-
