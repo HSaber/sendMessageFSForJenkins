@@ -59,7 +59,7 @@ json = {
                     "content": "查看报告",
                     "tag": "lark_md"
                 },
-                "url": JOB_URL+"/console",
+                "url": JOB_URL+"logText/progressiveText",
                 "type": "default",
                 "value": {}
             }],
